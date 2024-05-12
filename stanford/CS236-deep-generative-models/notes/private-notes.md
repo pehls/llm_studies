@@ -122,3 +122,134 @@ Pdata -> d(Pdata, P0) -> P0, 0 e M (models), we cant choose models who give us d
     - Application of deep generative models on a novel task/dataset.
     - Algorithmic improvements into the evaluation, learning and/or inference of deep generative models.
     - Theoretical analysis of any aspect of existing deep generative models.
+
+# Lecture 2
+
+## What is a generative model
+
+### Learning a generative model
+
+- with a set of examples, like images, texts, audio, etc, knowing that is a representation of some distribution, becoming of a specific background, seed. We known this dataset have a distribution, but we dont know what distribution it is.
+That distribution can be a lot complex, and if you think you have another distributions, like the model who can represent a distribution (or a family of models who can represent that), you can add another layer of complex thinks.
+
+- So, on a generative model, we want to learn a probability distribution p(x) over images x such that:
+
+    - Generation: If we sample Xnew ~ p(x), should like a dog (sampling)
+    - Density estimation: p(x) should be high if x looks like a dog, and low otherwise (anomaly detection)
+    - Unsupervised representation learning: We should be able to learn what these images have in common, like how a dog looks like, with ears, tail, etc (features)
+
+- First questiion: how to represent p(x)?
+
+#### Basic discrete distributions:
+
+##### Bernoulli distribution
+
+- like a (biased) coin flip, it comes with two binary categories
+    - D = {Heads, Tails}
+    - Specify P(X=Heads) = p. then P(X=Tails) = 1 - p
+    - Write X~Ber(p)
+    - Sampling: flip a (biased) coin
+
+##### Categorical distribution
+
+- like a (biased) m-sided dice
+    - D = {1,...,m}
+    - Specify P(Y=i)=pi, such that (sum)pi = 1
+    - Write Y~Cat(p1,...,pm)
+    - Sampling: roll a (biased) dice
+
+##### Joint distribution
+
+- Modeling a single pixels color:
+    - Red Channel R, Val(R) = {0,..., 255}
+    - Green Channel G, Val(G) = {0,..., 255}
+    - Blue Channel B, Val(B) = {0,..., 255}
+    - Sampling from the join distribution (r,g,b) ~ p(R,G,B) randomly generates a color for this pixel.
+    - to specify an probability of the joint distribution p(R=r, G=g, B=b): 255*255*255-1
+
+Example:
+In MNIST dataset, we have a lot of images of number with a specific pixel quantity.
+Val(Xi) = {0,1} = {Black, White}
+Possible states = {2*2*2....*2} = 2^n, n times.
+sampling from p(x1,...,xn) generates an image
+parameters will be 2^n - 1!
+
+#### Structure through independence
+
+- if X1, ..., Xn are independent, then p(X1,...,Xn) = p(x1)*p(x2)...p(xn)
+- possible states = 2^n
+- 2^n entries can be described by n numbers if |Val(Xi)|=2!
+
+### Chain Rule & Bayesian Rule
+
+<img title='Rules' src='../materials/two-rules.png'></img>
+
+it can be used to determine the probability of a sequence of words happenin, pixels, etc, a lot of random variables can be factorized with it.
+Essentialy, chain rule can determine the probability, given a marginal distribution of data, of a sequence of things:
+- p(x1,...,xn) = p(x1)p(x2|x1)p(x3|x1,x2)...p(xn|x1,...,xn-1)
+- How many parameters? 1+2+...+2^(n-1) = 2^n -1
+    - p(x1) requires 1 parameter
+    - p(x2|x1=0) requires 1 parameter, p(x2|x1=1) requires 1 parameter
+        - Total, 2 parameters
+
+with a markov model, you can predict the next word, but it cannot give a context at training time.
+
+### Bayes Network
+
+- It uses conditional parametrization, instead of joint parametrization:
+
+<img title='Bayes Network' src='../materials/bayes-network-definition.png'></img>
+
+- It is a data structura, graph-based, specified by a directed acyclic graph (DAG) G=(V,E), with:
+    - One node i e V, for each random variable Xi
+    - One conditional probability distribution (CPD) per node, specifying the var probability conditioned on its parents values
+- THe Graph G=(V,E) is called the structure of the Bayesian Network.
+- A simplified representation are |Pa(i)|, not |V|
+
+<img title='Bayes Network' src='../materials/bayes-network-example.png'></img>
+
+- essentially, with Bayes Network, we can resume a chain rule were every member have a dependence each other, based on the independence of some factors, so we can simplify the chain rule.
+
+### Naive Bayes for single label prediction
+
+- with a training dataset like emails, tryin to classify as a spam or not, we can estimate parameters from training data with Bayes rule.
+    - given each probability to be a spam, we calculate how much each word appear, enabling a sum of each probability multiplied by each other.
+
+### Discriminative vs generative:
+
+- With a chain rule p(Y,X) = p(X|Y)p(Y) = p(Y|X)p(X)
+- Corresponding Bayesian Networks:
+    <img title='Bayes Network' src='../materials/bayes-network-types.png'></img>
+- modelling X -> Y can be very difficult/complex, since we have a lot of details to capture with a network.
+
+Example with p(Y,X)?
+Logistic Regression!
+It give us the probability of Y happen, given a set of data X, using a logit function (or sigmoid):
+    <img title='Bayes Network' src='../materials/logistic-regression.png'></img>
+With this condition, we make a weaker statement about the relationship of the variables, since X was related to y, but not vice-versa.
+a point is, a logistic regression model doesnt assume independence between variables, inlike naiuve bayes. this can make a big difference in applications.
+
+Essentially, when using distriminative models, you cant input missings with that model, because you havent traiined a model to identify this distribution. Using generative models, you can archive that mission!
+
+### Neural Models
+
+we can think a neural model, with:
+    <img title='Single Neural Network' src='../materials/neural-models.png'></img>
+
+Stacking that network with a linear dependence between a input of features, the results from another layer, and weights random initializeds, and a bias, inside a logistic function, giving another layer of linear dependences, we can make a single neural network!
+
+Repeat it, and we have a neural network, more flexible to non-linear dependences, but in a logistic function for giving us probabilites, too.
+
+### Bayesian networks vs neural models
+
+- using chain rule,
+- we can make a Bayes Network:
+<img title='Rules' src='../materials/two-rules.png'></img>
+- and, applyin neural models, we can make a generative network, specifically giving a autoregressive assumption/condition to the neural network, addin a chain rule to our results, with a dependency of another layers/results/variables:
+<img title='NN' src='..\materials\neural-models-chain-rule.png'></img>
+
+### Continuous variables
+
+- we can mix different distributions around a Bayesian Network, or a Neural Network, factorizing it with Bayes chain rule.
+An example is Variational autoencoder, who are a Bayes net Z -> X, with factorization, pz,x(z,x) = pz(Z)px|z(X|Z), ZN(0,1), and X|(Z=z)~N(u0(z), e^0(z)), variances and means, from a gaussian distribution.
+At this example, a neural network was used inside the gaussian term, with weigths 0,o, using her results to determine Z give x values.
