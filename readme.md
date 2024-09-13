@@ -22,6 +22,10 @@ Organizei por fonte/empresa dispobibilizando o curso, e nome dos cursos na pasta
 │   │   ├── course_examples
 ├── google\
 │   ├── materials\
+├── langchain\
+│   ├── lang_graph
+│   │   ├── materials
+│   │   ├── notes
 ├── medium_articles\
 ├── my_articles_pt-br\
 ├── nvidia\
