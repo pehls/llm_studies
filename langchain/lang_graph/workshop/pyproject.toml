@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "workshop"
+version = "0.1.0"
+description = "tryn agentic workflows"
+authors = ["Gabriel Pehls <gabrielpehls@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+langgraph = "^0.2.21"
+nltk = "^3.9.1"
+langchain-core = "^0.3.0"
+langchain-community = "^0.3.0"
+langchain-experimental = "^0.3.0"
+dotenv = "^0.0.5"
+numpy = "^2.1.1"
+streamlit = "^1.38.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
