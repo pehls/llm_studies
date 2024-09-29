@@ -17,13 +17,14 @@
 		{"id":"4f132cd6b0cb2ecc","type":"file","file":"nvidia/generative_ai_with_diffusion_models/materials/nvidia_app_4.pdf","x":460,"y":-2200,"width":434,"height":280},
 		{"id":"9269527c9f2979e4","type":"file","file":"nvidia/generative_ai_with_diffusion_models/materials/nvidia_app_5.pdf","x":460,"y":-1880,"width":434,"height":280},
 		{"id":"3dee0cb7bbf59109","type":"file","file":"books/generative ai with python and tensorflow 2.pdf","x":-1080,"y":-2200,"width":400,"height":600},
-		{"id":"1962520acd16e242","type":"file","file":"nvidia/building_rag_agents_with_llms/materials/DLI-RAG-Slides.pdf","x":-860,"y":-1440,"width":434,"height":280},
-		{"id":"7a52fe3d2f747dc3","type":"file","file":"langchain/lang_graph/notes/lang-graph-private-notes.md","x":-326,"y":-1440,"width":400,"height":520},
-		{"id":"3f1b6d8063a7e9d2","type":"file","file":"books/modern generative ai with chatgpt and openai models.pdf","x":-1320,"y":-1440,"width":420,"height":520},
 		{"id":"d5a25f50a475594d","type":"file","file":"books/generative ai with langchain.pdf","subpath":"#page=106","x":-2000,"y":-1440,"width":640,"height":520},
 		{"id":"bbaf8d528656c7f1","type":"file","file":"nvidia/generative_ai_with_diffusion_models/materials/nvidia_app_1.pdf","x":-560,"y":-1880,"width":434,"height":280},
 		{"id":"b06aaf200bb74f24","type":"file","file":"stanford/CS236-deep-generative-models/notes/cs-236-private-notes.md","x":1000,"y":-2200,"width":400,"height":600},
-		{"id":"2d6752ed39a37b8d","type":"file","file":"nvidia/generative_ai_with_diffusion_models/materials/nvidia_app_0.pdf","x":-560,"y":-2200,"width":434,"height":280}
+		{"id":"2d6752ed39a37b8d","type":"file","file":"nvidia/generative_ai_with_diffusion_models/materials/nvidia_app_0.pdf","x":-560,"y":-2200,"width":434,"height":280},
+		{"id":"1962520acd16e242","type":"file","file":"nvidia/building_rag_agents_with_llms/materials/DLI-RAG-Slides.pdf","x":-860,"y":-1440,"width":434,"height":280},
+		{"id":"7a52fe3d2f747dc3","type":"file","file":"langchain/lang_graph/notes/lang-graph-private-notes.md","x":-326,"y":-1440,"width":400,"height":520},
+		{"id":"3f1b6d8063a7e9d2","type":"file","file":"books/modern generative ai with chatgpt and openai models.pdf","x":-1320,"y":-1440,"width":420,"height":520},
+		{"id":"9f1f638980e34510","x":-3480,"y":-1380,"width":400,"height":480,"type":"file","file":"books/Mastering RAG.pdf"}
 	],
 	"edges":[
 		{"id":"6350dfc0649ec5ba","fromNode":"c6eff70568e21a2b","fromSide":"right","toNode":"f71e4adf63515952","toSide":"left"},
